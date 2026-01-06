@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this._store.dispatch(AuthActions.loginAction({ user: value }));
       },
       error: (err) => {},
-      complete: () => {},
+      complete: () => this.router.navigate(["/courses"]),
     });
   }
 }
