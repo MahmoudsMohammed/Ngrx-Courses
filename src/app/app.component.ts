@@ -13,6 +13,7 @@ import {
   isLoggedInSelector,
   isLoggedOutSelector,
 } from "./auth/store/auth.selector";
+import { AuthActions } from "./auth/store/auth.actions";
 
 @Component({
   selector: "app-root",
@@ -51,5 +52,8 @@ export class AppComponent implements OnInit {
     this.isLoggedOut$ = this._store.pipe(select(isLoggedOutSelector));
   }
 
-  logout() {}
+  logout() {
+    this._store.dispatch(AuthActions.logoutAction());
+    this.router.navigateByUrl("/login");
+  }
 }

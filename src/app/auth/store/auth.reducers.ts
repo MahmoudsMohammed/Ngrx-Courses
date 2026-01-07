@@ -6,5 +6,11 @@ export const authReducer = createReducer(
   initialAuthState,
   on(AuthActions.loginAction, (state, action) => {
     return { ...action.user };
+  }),
+  on(AuthActions.logoutAction, (state, action) => {
+    return {
+      email: "",
+      id: "",
+    };
   })
 );
