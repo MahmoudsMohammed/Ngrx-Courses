@@ -7,4 +7,6 @@ const loginAction = createAction(
 );
 const logoutAction = createAction("[Side Menu] User Logout");
 
-export const AuthActions = { loginAction, logoutAction };
+const userDataFromLS = createAction("[App Init] Load User Data From LS");
+
+export const AuthActions = { loginAction, logoutAction, userDataFromLS };
