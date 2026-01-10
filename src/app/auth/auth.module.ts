@@ -11,6 +11,7 @@ import { AuthService } from "./auth.service";
 import { EffectsModule } from "@ngrx/effects";
 import { authReducer } from "./store/auth.reducers";
 import { authFeature } from "./store/auth.feature";
+import { AuthEffects } from "./store/auth.effects";
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { authFeature } from "./store/auth.feature";
     RouterModule.forChild([{ path: "", component: LoginComponent }]),
     // StoreModule.forFeature("auth", authReducer),
     StoreModule.forFeature(authFeature),
+    EffectsModule.forFeature([AuthEffects]),
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent],
