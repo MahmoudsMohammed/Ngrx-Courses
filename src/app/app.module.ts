@@ -57,7 +57,24 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     AuthModule.forRoot(),
-    StoreModule.forRoot({ router: routerReducer }),
+    StoreModule.forRoot(
+      { router: routerReducer },
+      // Same As Dev Tool make runtimeChecks works in dev mode to avoid errors at production
+      {
+        runtimeChecks: {
+          // Prevent Mutate State inside of the reducer
+          strictStateImmutability: !environment.production,
+          // Prevent mutate action object inside reducer or effect
+          strictActionImmutability: !environment.production,
+          strictStateSerializability: !environment.production,
+          strictActionSerializability: !environment.production,
+          // Ensures actions are dispatched inside Angular’s zone
+          strictActionWithinNgZone: !environment.production,
+          // Action is not defined twice anywhere in the app.
+          strictActionTypeUniqueness: !environment.production,
+        },
+      },
+    ),
     EffectsModule.forRoot(),
     // Provide Time Travel Debugging
     StoreDevtoolsModule.instrument({
