@@ -26,10 +26,13 @@ export class AppComponent implements OnInit {
   isLoggedOut$: Observable<boolean>;
   loading = true;
 
-  constructor(private router: Router, private _store: Store) {}
+  constructor(
+    private router: Router,
+    private _store: Store,
+  ) {}
 
   ngOnInit() {
-    this._store.dispatch(AuthActions.userDataFromLS());
+    // this._store.dispatch(AuthActions.userDataFromLS());
     this.router.events.subscribe((event) => {
       switch (true) {
         case event instanceof NavigationStart: {

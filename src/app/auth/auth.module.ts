@@ -21,7 +21,9 @@ import { AuthEffects } from "./store/auth.effects";
     MatInputModule,
     MatButtonModule,
     RouterModule.forChild([{ path: "", component: LoginComponent }]),
+    // Old way of define feature State
     // StoreModule.forFeature("auth", authReducer),
+    // Define Using Create Feature
     StoreModule.forFeature(authFeature),
     EffectsModule.forFeature([AuthEffects]),
   ],
