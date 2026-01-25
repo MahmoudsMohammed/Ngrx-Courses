@@ -29,6 +29,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { EntityDataModule } from "@ngrx/data";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { authorizedUserGuard } from "./guards/authorized-user.guard";
+import { loggerMetaReducer } from "./app.metaReducers";
 
 const routes: Routes = [
   {
@@ -61,6 +62,7 @@ const routes: Routes = [
       { router: routerReducer },
       // Same As Dev Tool make runtimeChecks works in dev mode to avoid errors at production
       {
+        metaReducers: [loggerMetaReducer],
         runtimeChecks: {
           // Prevent Mutate State inside of the reducer
           strictStateImmutability: !environment.production,
