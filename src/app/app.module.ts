@@ -30,11 +30,13 @@ import { EntityDataModule } from "@ngrx/data";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { authorizedUserGuard } from "./guards/authorized-user.guard";
 import { appMetaReducers, getInitialAppState } from "./app.store";
+import { coursesResolver } from "./courses/courses.resolver";
 
 const routes: Routes = [
   {
     path: "courses",
     canActivate: [authorizedUserGuard],
+    resolve: [coursesResolver],
     loadChildren: () =>
       import("./courses/courses.module").then((m) => m.CoursesModule),
   },

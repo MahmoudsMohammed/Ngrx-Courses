@@ -31,7 +31,7 @@ function ngrxLsStore(reducer: ActionReducer<any>): ActionReducer<any> {
 }
 
 export const appMetaReducers: MetaReducer<any>[] = [
-  loggerMetaReducer,
+  // loggerMetaReducer,
   ngrxLsStore,
 ];
 
