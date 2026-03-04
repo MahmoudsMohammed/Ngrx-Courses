@@ -7,7 +7,12 @@ import { MatDialog } from "@angular/material/dialog";
 import { filter, map, shareReplay, tap } from "rxjs/operators";
 import { CoursesHttpService } from "../services/courses-http.service";
 import { Store } from "@ngrx/store";
-import { coursesSelector } from "../store/course.selector";
+import { CoursesEntity } from "../store/course.reducer";
+import {
+  advancedCoursesSelector,
+  beginnerCoursesSelector,
+  promoCountSelector,
+} from "../store/course.selector";
 
 @Component({
   selector: "home",
@@ -35,25 +40,9 @@ export class HomeComponent implements OnInit {
   }
 
   reload() {
-    const courses$ = this._store.select(coursesSelector).pipe(shareReplay());
-
-    this.loading$ = courses$.pipe(map((courses) => !!courses));
-
-    this.beginnerCourses$ = courses$.pipe(
-      map((courses) =>
-        courses.filter((course) => course.category == "BEGINNER"),
-      ),
-    );
-
-    this.advancedCourses$ = courses$.pipe(
-      map((courses) =>
-        courses.filter((course) => course.category == "ADVANCED"),
-      ),
-    );
-
-    this.promoTotal$ = courses$.pipe(
-      map((courses) => courses.filter((course) => course.promo).length),
-    );
+    this.beginnerCourses$ = this._store.select(beginnerCoursesSelector);
+    this.advancedCourses$ = this._store.select(advancedCoursesSelector);
+    this.promoTotal$ = this._store.select(promoCountSelector);
   }
 
   onAddCourse() {
