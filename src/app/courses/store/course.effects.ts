@@ -24,4 +24,21 @@ export class CoursesEffects {
       ),
     ),
   );
+
+  updateCourseData = createEffect(
+    () => {
+      return this._actions.pipe(
+        ofType(coursesActions.courseUpdate),
+        switchMap((action) => {
+          return this._coursesHttpService.saveCourse(
+            action.courseUpdates.id,
+            action.courseUpdates.changes,
+          );
+        }),
+      );
+    },
+    {
+      dispatch: false,
+    },
+  );
 }

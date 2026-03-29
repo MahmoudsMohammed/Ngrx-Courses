@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Course } from "../model/course";
+import { Update } from "@ngrx/entity";
 
 const loadAllCourses = createAction("[Courses Resolver] Load Courses From API");
 const coursesLoaded = createAction(
@@ -7,4 +8,9 @@ const coursesLoaded = createAction(
   props<{ courses: Course[] }>(),
 );
 
-export const coursesActions = { loadAllCourses, coursesLoaded };
+const courseUpdate = createAction(
+  "[Update Course Dialog] Update Course Info",
+  props<{ courseUpdates: Update<Course> }>(),
+);
+
+export const coursesActions = { loadAllCourses, coursesLoaded, courseUpdate };
