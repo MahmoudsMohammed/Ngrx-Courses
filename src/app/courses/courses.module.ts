@@ -30,6 +30,7 @@ import { compareCourses, Course } from "./model/course";
 
 import { compareLessons, Lesson } from "./model/lesson";
 import { CourseEntityService } from "./store/course.entity.service";
+import { CoursesDataService } from "./store/courses.data.service";
 
 export const coursesRoutes: Routes = [
   {
@@ -78,10 +79,15 @@ const entityMetadata: EntityMetadataMap = {
     EditCourseDialogComponent,
     CourseComponent,
   ],
-  providers: [CoursesHttpService, CourseEntityService],
+  providers: [CoursesHttpService],
 })
 export class CoursesModule {
-  constructor(private eds: EntityDefinitionService) {
+  constructor(
+    private eds: EntityDefinitionService,
+    private entityDataService: EntityDataService,
+    private coursesDataService: CoursesDataService,
+  ) {
     eds.registerMetadataMap(entityMetadata);
+    entityDataService.registerService("courses", coursesDataService);
   }
 }
