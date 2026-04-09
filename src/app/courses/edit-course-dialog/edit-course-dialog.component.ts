@@ -68,8 +68,7 @@ export class EditCourseDialogComponent {
     } else if (this.mode === "create") {
       dataObservable = this._courseEntityService.add(course);
     }
-    this.dialogRef.close();
-    // this.closeDialogAfterSave(dataObservable);
+    this.closeDialogAfterSave(dataObservable);
   }
 
   private closeDialogAfterSave(actionObservable: Observable<Course>) {

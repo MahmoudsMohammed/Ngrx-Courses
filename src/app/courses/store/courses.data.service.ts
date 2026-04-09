@@ -22,4 +22,8 @@ export class CoursesDataService extends DefaultDataService<Course> {
   update(update: Update<Course>, options?: HttpOptions): Observable<Course> {
     return this.http.put<Course>("/api/course/" + update.id, update.changes);
   }
+
+  add(entity: Course, options?: HttpOptions): Observable<Course> {
+    return this.http.post<Course>("/api/course", entity);
+  }
 }
