@@ -58,6 +58,7 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     AuthModule.forRoot(),
+    EntityDataModule,
     StoreModule.forRoot(
       { router: routerReducer },
       // Same As Dev Tool make runtimeChecks works in dev mode to avoid errors at production
