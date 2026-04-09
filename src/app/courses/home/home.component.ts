@@ -5,7 +5,7 @@ import { defaultDialogConfig } from "../shared/default-dialog-config";
 import { EditCourseDialogComponent } from "../edit-course-dialog/edit-course-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { map, shareReplay } from "rxjs/operators";
-import { CoursesHttpService } from "../services/courses-http.service";
+import { CourseEntityService } from "../store/course.entity.service";
 
 @Component({
   selector: "home",
@@ -14,32 +14,27 @@ import { CoursesHttpService } from "../services/courses-http.service";
   standalone: false,
 })
 export class HomeComponent implements OnInit {
-  promoTotal$: Observable<number>;
+  promoTotal$!: Observable<number>;
 
-  loading$: Observable<boolean>;
+  loading$!: Observable<boolean>;
 
-  beginnerCourses$: Observable<Course[]>;
+  beginnerCourses$!: Observable<Course[]>;
 
-  advancedCourses$: Observable<Course[]>;
+  advancedCourses$!: Observable<Course[]>;
 
   constructor(
     private dialog: MatDialog,
-    private coursesHttpService: CoursesHttpService,
-  ) {
-    console.log("************* From Component ***************");
-  }
+    private _courseEntityService: CourseEntityService,
+  ) {}
 
   ngOnInit() {
     this.reload();
   }
 
   reload() {
-    const courses$ = this.coursesHttpService.findAllCourses().pipe(
-      map((courses) => courses.sort(compareCourses)),
-      shareReplay(),
-    );
+    const courses$ = this._courseEntityService.entities$.pipe(shareReplay());
 
-    this.loading$ = courses$.pipe(map((courses) => !!courses));
+    this.loading$ = this._courseEntityService.loading$;
 
     this.beginnerCourses$ = courses$.pipe(
       map((courses) =>
