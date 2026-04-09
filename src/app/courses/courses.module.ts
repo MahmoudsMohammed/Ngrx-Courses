@@ -26,7 +26,7 @@ import {
   EntityDefinitionService,
   EntityMetadataMap,
 } from "@ngrx/data";
-import { compareCourses, Course } from "./model/course";
+import { compareCourses } from "./model/course";
 
 import { compareLessons, Lesson } from "./model/lesson";
 import { CourseEntityService } from "./store/course.entity.service";
@@ -44,7 +44,12 @@ export const coursesRoutes: Routes = [
 ];
 
 const entityMetadata: EntityMetadataMap = {
-  courses: {},
+  courses: {
+    sortComparer: compareCourses,
+    entityDispatcherOptions: {
+      optimisticUpdate: true,
+    },
+  },
 };
 
 @NgModule({
