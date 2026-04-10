@@ -26,4 +26,11 @@ export class CoursesDataService extends DefaultDataService<Course> {
   add(entity: Course, options?: HttpOptions): Observable<Course> {
     return this.http.post<Course>("/api/course", entity);
   }
+
+  delete(
+    key: number | string,
+    options?: HttpOptions,
+  ): Observable<number | string> {
+    return this.http.delete<number | string>(`/api/course/${key}`);
+  }
 }

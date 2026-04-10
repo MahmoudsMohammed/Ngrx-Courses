@@ -71,11 +71,11 @@ export class EditCourseDialogComponent {
     this.closeDialogAfterSave(dataObservable);
   }
 
-  private closeDialogAfterSave(actionObservable: Observable<Course>) {
+  private closeDialogAfterSave(actionObservable: Observable<Course>): void {
     actionObservable
       .pipe(
         finalize(() => {
-          this.dialogRef.close();
+          this.onClose();
         }),
       )
       .subscribe();
