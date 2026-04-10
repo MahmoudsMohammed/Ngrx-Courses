@@ -50,6 +50,7 @@ const entityMetadata: EntityMetadataMap = {
       optimisticUpdate: true,
     },
   },
+  lessons: {},
 };
 
 @NgModule({
